@@ -1,0 +1,8 @@
+id = "transfer-logger"
+name = "Transfer Logger"
+version = "1.0.0"
+description = "Notifies when SFTP uploads and downloads finish, with the file path."
+author = "MeshVault"
+entry = "main.lua"
+permissions = ["notify"]
+hooks = ["sftp:upload_complete", "sftp:download_complete"]

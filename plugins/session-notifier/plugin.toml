@@ -1,0 +1,8 @@
+id = "session-notifier"
+name = "Session Notifier"
+version = "1.0.0"
+description = "Desktop notification when any SSH session connects or disconnects."
+author = "MeshVault"
+entry = "main.lua"
+permissions = ["notify"]
+hooks = ["session:connected", "session:disconnected"]

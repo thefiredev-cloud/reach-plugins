@@ -1,0 +1,8 @@
+id = "fleet-summary"
+name = "Fleet Summary"
+version = "1.0.0"
+description = "Reports how many SSH sessions are open when Reach starts, and lists their hosts."
+author = "MeshVault"
+entry = "main.lua"
+permissions = ["ssh_list_connections", "notify"]
+hooks = []
