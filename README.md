@@ -1,39 +1,41 @@
-# Reach Plugins
+# reach-plugins
 
-Seed Lua plugins for the Reach SSH client marketplace.
+Three small Lua plugins for [Reach](https://github.com/alexandrosnt/Reach), the open-source SSH client built with Rust and Tauri.
 
-## Why it exists
+## Plugins
 
-Reach needed a small, inspectable set of plugins (notify on connect, log transfers, summarize sessions) without bundling them inside the app binary.
+| Plugin | What it does | Permissions |
+|---|---|---|
+| [`session-notifier`](plugins/session-notifier) | Shows a notification when an SSH session connects or disconnects | `notify` |
+| [`transfer-logger`](plugins/transfer-logger) | Shows a notification when an SFTP transfer finishes | `notify` |
+| [`fleet-summary`](plugins/fleet-summary) | On startup, reports how many SSH sessions are open and lists their hosts | `ssh_list_connections`, `notify` |
 
-## How to run it
+Each plugin is a folder with a `plugin.toml` manifest (id, version, entry file, permissions) and a `main.lua` entry point that calls the `reach.ui`, `reach.log`, and `reach.ssh` APIs.
 
-There is no daemon. Zip a plugin directory so `plugin.toml` is at the archive root, then drop the zip into the Reach plugins directory or list it in `thefiredev-cloud/reach-plugins-registry`.
+## Requirements
+
+A Reach build with plugin support. The plugins were written against the plugin API in the [thefiredev-cloud/Reach](https://github.com/thefiredev-cloud/Reach) fork; newer upstream Reach releases may change that API.
+
+## Install
+
+Zip a plugin folder so that `plugin.toml` sits at the root of the archive, then place it in the Reach plugins directory:
 
 ```bash
 git clone https://github.com/thefiredev-cloud/reach-plugins.git
-cd reach-plugins
+cd reach-plugins/plugins/session-notifier
+zip -r ../../session-notifier.zip .
 ```
 
-Plugins in this tree:
+The plugins directory is shown, and can be changed, in Reach under Settings, Plugins.
 
-- `session-notifier` — notify on SSH connect/disconnect (`notify`)
-- `transfer-logger` — notify on SFTP transfer completion (`notify`)
-- `fleet-summary` — report open SSH sessions on startup (`ssh_list_connections`, `notify`)
+## Write your own
 
-## In scope
-
-- Seed plugin source for Reach
-
-## Out of scope
-
-- The Reach application (see `thefiredev-cloud/Reach`)
-- A populated public registry (see `reach-plugins-registry`, emptied)
-
-## Production
-
-Not deployed as a service. Consumed by Reach installs.
+Copy a plugin folder, change `id` and `name` in `plugin.toml`, and request only the permissions you use. Hooks used here: `on_init`, `on_session_connected(data)`, `on_session_disconnected(data)`, `on_sftp_upload_complete`, and `on_sftp_download_complete`.
 
 ## Status
 
-Live seed source. Registry index is emptied.
+Seed examples. There is no published registry listing: [reach-plugins-registry](https://github.com/thefiredev-cloud/reach-plugins-registry) is an empty index. Not affiliated with the Reach upstream project.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
