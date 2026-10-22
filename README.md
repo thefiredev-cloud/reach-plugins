@@ -161,6 +161,30 @@ plugins/
 
 There is no test suite, linter or build step. To change a plugin, edit its files in the Reach plugins directory and select Reload All in Settings > Plugins. Test against your Reach version before relying on a plugin. This project is not affiliated with the upstream Reach project.
 
+<!-- arch:begin -->
+## Architecture
+
+Three example Lua plugins for the Reach SSH client: connect/disconnect and SFTP toasts, and an open-session list.
+
+```mermaid
+flowchart LR
+  user(["Reach user<br/>or plugin author"]):::actor
+  reach{{"Reach host app<br/>Rust + Tauri, Luau sandbox"}}:::ext
+  sn["session-notifier"]:::app
+  tl["transfer-logger"]:::app
+  fs["fleet-summary"]:::app
+  user -->|"installs plugins"| reach
+  reach -->|"events"| sn
+  reach -->|"events"| tl
+  reach -->|"on load"| fs
+  classDef actor fill:#fde68a,stroke:#b45309,color:#111827
+  classDef app fill:#bfdbfe,stroke:#1d4ed8,color:#0b1220
+  classDef ext fill:#e5e7eb,stroke:#4b5563,color:#0b1220,stroke-dasharray:4 3
+```
+
+[Full architecture](docs/ARCHITECTURE.md) · Hi-res: [SVG](docs/architecture/whiteboard.svg) · [PNG 3x](docs/architecture/whiteboard@3x.png) · [dark PNG](docs/architecture/whiteboard.dark@3x.png) · [Explorable (Archify)](docs/architecture/reach-plugins.archify.html) · [Graphify report](docs/architecture/graphify/GRAPH_REPORT.md)
+<!-- arch:end -->
+
 ## License
 
 MIT. See [LICENSE](LICENSE).

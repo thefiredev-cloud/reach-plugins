@@ -1,0 +1,15 @@
+flowchart LR
+  user(["Reach user / plugin author"]):::actor
+  SYSTEM["reach-plugins<br/>the system in this repo"]:::app
+  reach{{"Reach (Rust + Tauri host app)"}}:::ext
+  reg{{"Plugin registry (marketplace)"}}:::ext
+  user -->|"copies plugin folder in"| reach
+  reach -->|"session events"| SYSTEM
+  reach -->|"SFTP events"| SYSTEM
+  reach -->|"on_init at load"| SYSTEM
+  SYSTEM -->|"reach.ui.notify"| reach
+  SYSTEM -->|"reach.ssh.list_connections"| reach
+  user -.->|"publish zip (optional)"| reg
+  classDef actor fill:#fde68a,stroke:#b45309,color:#111827
+  classDef app fill:#bfdbfe,stroke:#1d4ed8,color:#0b1220
+  classDef ext fill:#e5e7eb,stroke:#4b5563,color:#0b1220,stroke-dasharray:4 3

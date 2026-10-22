@@ -1,0 +1,41 @@
+{
+ "repo": "reach-plugins",
+ "files_tracked": 9,
+ "head": "6321899e907fe27a2f6f13b1c8d009b681a90653",
+ "origin": "https://github.com/thefiredev-cloud/reach-plugins.git",
+ "default_branch": "main",
+ "languages": [
+  [
+   ".lua",
+   3
+  ],
+  [
+   ".toml",
+   3
+  ],
+  [
+   ".md",
+   1
+  ]
+ ],
+ "readme": "README.md",
+ "readme_first_paragraph": "Three example Lua plugins for [Reach](https://github.com/alexandrosnt/Reach), the open-source SSH client built with Rust and Tauri. Two of them show in-app notifications when SSH sessions connect or disconnect and when SFTP transfers finish. The third lists your open sessions. They are for Reach users who want those notifications and for plugin authors who want small working examples to copy.",
+ "top_dirs": [
+  "plugins"
+ ],
+ "manifests": [],
+ "libs": [],
+ "entry_points": [],
+ "services": [],
+ "deploy_targets": [],
+ "ci_workflows": [],
+ "cron_and_timers": [],
+ "files_scanned": 6,
+ "external_hosts": [],
+ "env_var_names": [],
+ "ci_secret_names": [],
+ "data_store_signals": {},
+ "auth_signals": {},
+ "tests": [],
+ "docs_files": []
+}
