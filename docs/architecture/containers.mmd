@@ -1,0 +1,20 @@
+flowchart LR
+  user(["Reach user / plugin author"]):::actor
+  reach{{"Reach (Rust + Tauri host app)"}}:::ext
+  reg{{"Plugin registry (marketplace)"}}:::ext
+  subgraph SYSTEM["reach-plugins"]
+    sn["session-notifier<br/>Lua + plugin.toml"]:::app
+    tl["transfer-logger<br/>Lua + plugin.toml"]:::app
+    fs["fleet-summary<br/>Lua + plugin.toml"]:::app
+  end
+  user -->|"copies plugin folder in"| reach
+  reach -->|"session events"| sn
+  reach -->|"SFTP events"| tl
+  reach -->|"on_init at load"| fs
+  sn -->|"reach.ui.notify"| reach
+  tl -->|"reach.ui.notify"| reach
+  fs -->|"reach.ssh.list_connections"| reach
+  user -.->|"publish zip (optional)"| reg
+  classDef actor fill:#fde68a,stroke:#b45309,color:#111827
+  classDef app fill:#bfdbfe,stroke:#1d4ed8,color:#0b1220
+  classDef ext fill:#e5e7eb,stroke:#4b5563,color:#0b1220,stroke-dasharray:4 3

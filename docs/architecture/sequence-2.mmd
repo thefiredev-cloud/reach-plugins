@@ -1,0 +1,10 @@
+sequenceDiagram
+  autonumber
+  actor user as User
+  participant dir as Reach plugins dir
+  participant reach as Reach
+  user->>dir: copy plugin folder (name equals id in plugin.toml)
+  user->>reach: Settings > Plugins > Discover
+  reach->>dir: scan for plugin.toml
+  reach->>reach: enable plugin, grant every manifest permission
+  reach->>reach: run main.lua, call on_init()

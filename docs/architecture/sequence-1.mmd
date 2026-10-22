@@ -1,0 +1,11 @@
+sequenceDiagram
+  autonumber
+  actor user as User
+  participant reach as Reach
+  participant lua as session-notifier (Luau VM)
+  participant ui as Plugins panel toast
+  user->>reach: connect to a host
+  reach->>lua: on_session_connected(data)
+  lua->>reach: reach.ui.notify(Connected: user@host)
+  reach->>ui: toast
+  lua->>reach: reach.log.info(...)

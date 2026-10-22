@@ -1,0 +1,11 @@
+flowchart LR
+  subgraph host_desk["User's desktop"]
+    reach{{"Reach app<br/>while Reach runs"}}:::ext
+    dir[("plugins directory<br/>scanned on Discover or restart")]:::store
+    vm["Luau VM per plugin<br/>64 MB, 5 s hook timeout"]:::app
+  end
+  reach -->|"scan"| dir
+  reach -->|"run main.lua"| vm
+  classDef app fill:#bfdbfe,stroke:#1d4ed8,color:#0b1220
+  classDef ext fill:#e5e7eb,stroke:#4b5563,color:#0b1220,stroke-dasharray:4 3
+  classDef store fill:#bbf7d0,stroke:#15803d,color:#0b1220
